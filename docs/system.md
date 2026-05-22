@@ -16,11 +16,11 @@ This design keeps the application simple, fast, and fully self-hosted.
 
 ## Domain Model
 
-### Tasks
+### Todo Items
 
-A `Task` is the primary entity of the system. 
+A `TodoItem` is the primary entity of the system. 
 
-Each task contains:
+Each TodoItem contains:
 
 - Name — short, human-readable title
 - Description — optional detailed information
@@ -31,11 +31,11 @@ Each task contains:
 
 ### Tags
 
-A `Tag` is a lightweight categorization label for tasks.
+A `Tag` is a lightweight categorization label for TodoItems.
 
 Each tag contains:
 
 - Name
 - Color
 
-Tags allow tasks to be grouped, filtered, and visually distinguished.
+Tags allow TodoItems to be grouped, filtered, and visually distinguished.
