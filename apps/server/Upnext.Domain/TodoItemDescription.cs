@@ -14,8 +14,12 @@ public record struct TodoItemDescription
         var processed = value?.Trim() ?? string.Empty;
 
         if (processed.Length > MaxLength)
-            return Result<TodoItemDescription>.Failure(TodoItemErrors.DescriptionTooLong);
+        {
+            return Result.Failure<TodoItemDescription>(TodoItemErrors.DescriptionTooLong);
+        }
 
-        return Result<TodoItemDescription>.Success(new TodoItemDescription(processed));
+        return Result.Success(new TodoItemDescription(processed));
     }
+    
+    public static TodoItemDescription Empty => Create("").Value;
 }

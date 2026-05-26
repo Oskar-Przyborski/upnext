@@ -23,10 +23,12 @@ public class TodoItemConfiguration : IEntityTypeConfiguration<TodoItem>
         
         builder.Property(t => t.Name)
             .HasConversion(t => t.Value, t => TodoItemName.Create(t).Value)
+            .HasMaxLength(TodoItemName.MaxLength)
             .IsRequired();
         
         builder.Property(t => t.Description)
             .HasConversion(t => t.Value, t => TodoItemDescription.Create(t).Value)
+            .HasMaxLength(TodoItemDescription.MaxLength)
             .IsRequired();
         
         builder.Property(t => t.DueDate)

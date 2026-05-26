@@ -1,11 +1,17 @@
 info:
-  name: Create TodoItem
+  name: TodoItem Create
   type: http
   seq: 1
 
 http:
   method: POST
   url: http://localhost:8080/v1/todoitems
+  body:
+    type: json
+    data: |-
+      {
+        "name": "Hello"
+      }
   auth: inherit
 
 settings:

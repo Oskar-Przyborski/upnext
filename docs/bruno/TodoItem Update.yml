@@ -1,0 +1,29 @@
+info:
+  name: TodoItem Update
+  type: http
+  seq: 2
+
+http:
+  method: PUT
+  url: http://localhost:8080/v1.0/todoitems/:todoItemId
+  params:
+    - name: todoItemId
+      value: ""
+      type: path
+  body:
+    type: json
+    data: |-
+      {
+        "name": "Hello Updated",
+        "description": "Welcome!",
+        "dueDate": "2026-01-01T00:00:10Z",
+        "priority": 2,
+        "status": 1
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

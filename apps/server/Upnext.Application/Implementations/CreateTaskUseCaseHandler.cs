@@ -28,6 +28,6 @@ public class CreateTaskUseCaseHandler(
         todoItemRepository.Add(create);
         await unitOfWork.SaveChangesAsync(cancellationToken);
         
-        return Result<TodoItemId>.Success(create.Id);
+        return Result.Success(create.Id);
     }
 }
