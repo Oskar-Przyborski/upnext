@@ -6,7 +6,7 @@ using Upnext.Domain.Shared;
 
 namespace Upnext.Application.Implementations;
 
-public class CreateTaskUseCaseHandler(
+public class CreateTodoItemUseCaseHandler(
     TimeProvider clock,
     ITodoItemRepository todoItemRepository,
     IUnitOfWork unitOfWork) : IRequestHandler<CreateTodoItemUseCase.Request, Result<TodoItemId>>

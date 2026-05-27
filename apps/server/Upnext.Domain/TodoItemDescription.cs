@@ -9,6 +9,7 @@ public record struct TodoItemDescription
 
     private TodoItemDescription(string value) => Value = value;
 
+    public static implicit operator string(TodoItemDescription description) => description.Value;
     public static Result<TodoItemDescription> Create(string? value)
     {
         var processed = value?.Trim() ?? string.Empty;

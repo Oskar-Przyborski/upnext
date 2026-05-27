@@ -1,13 +1,12 @@
 using Mediator;
-using Upnext.Contracts;
 using Upnext.Domain;
 using Upnext.Domain.Shared;
 
 namespace Upnext.Application.Input;
 
-public static class GetTodoItemUseCase
+public static class DeleteTodoItemUseCase
 {
-    public record Request : IRequest<Result<TodoItemDto>>
+    public record Request : IRequest<Result>
     {
         public required TodoItemId TodoItemId { get; set; }
     }

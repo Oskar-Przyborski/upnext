@@ -4,7 +4,7 @@ using Upnext.Domain;
 
 namespace Upnext.Postgres.Repositories;
 
-public class TodoItemRepository(
+public class DbTodoItemRepository(
     AppDbContext dbContext) : ITodoItemRepository
 {
     public void Add(TodoItem todoItem)

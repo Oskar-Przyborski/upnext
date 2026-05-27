@@ -11,6 +11,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\Upnext.Contracts\Upnext.Contracts.csproj" />
       <ProjectReference Include="..\Upnext.Domain\Upnext.Domain.csproj" />
     </ItemGroup>
 

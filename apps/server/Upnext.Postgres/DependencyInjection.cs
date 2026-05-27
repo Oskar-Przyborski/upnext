@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Upnext.Application.Output;
+using Upnext.Postgres.Queries;
 using Upnext.Postgres.Repositories;
 
 namespace Upnext.Postgres;
@@ -10,7 +11,9 @@ public static class DependencyInjection
     public static IServiceCollection InstallPostgresAdapter(this IServiceCollection services)
     {
         services.AddDbContext<IUnitOfWork, AppDbContext>();
-        services.AddScoped<ITodoItemRepository, TodoItemRepository>();
+        services.AddScoped<ITodoItemRepository, DbTodoItemRepository>();
+        services.AddScoped<ITodoItemQuery, DbTodoItemQuery>();
+        services.AddScoped<ITodoItemsQuery, DbTodoItemsQuery>();
 
         return services;
     }

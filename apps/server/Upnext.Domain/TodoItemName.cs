@@ -9,6 +9,8 @@ public record struct TodoItemName
 
     private TodoItemName(string value) => Value = value;
 
+    public static explicit operator string(TodoItemName name) => name.Value;
+
     public static Result<TodoItemName> Create(string? value)
     {
         var trimmed = value?.Trim();

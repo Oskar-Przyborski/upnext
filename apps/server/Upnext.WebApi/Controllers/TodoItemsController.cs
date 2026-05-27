@@ -15,6 +15,26 @@ public class TodoItemsController(
     ISender sender) : ControllerBase
 {
     [MapToApiVersion(1)]
+    [HttpGet]
+    public async Task<ActionResult<TodoItem>> GetAllItems(
+        [FromQuery] int? skip,
+        [FromQuery] int? take,
+        [FromQuery] string? query,
+        CancellationToken ct)
+    {
+        var request = new GetTodoItemsUseCase.Request
+        {
+            Skip = skip ?? 0,
+            Take = take ?? int.MaxValue,
+            Query = query ?? string.Empty,
+        };
+
+        var response = await sender.Send(request, ct);
+        return response.Match(Ok, err => err.ToActionResult());
+    }
+
+
+    [MapToApiVersion(1)]
     [HttpPost]
     public async Task<IActionResult> Create(
         [FromBody] CreateTodoItemBody body,
@@ -36,11 +56,9 @@ public class TodoItemsController(
         };
 
         var response = await sender.Send(request, ct);
-        if (!response.IsSuccess) response.Error.ToActionResult();
-
-        return Ok(response.Value.Value);
+        return response.Match(id => Ok(id.Value), err => err.ToActionResult());
     }
-   
+
     [MapToApiVersion(1)]
     [HttpGet("{todoItemId:guid}")]
     public async Task<ActionResult<TodoItem>> GetItem(
@@ -53,11 +71,9 @@ public class TodoItemsController(
         };
 
         var response = await sender.Send(request, ct);
-        if (!response.IsSuccess) return response.Error.ToActionResult();
-
-        return Ok(response.Value);
+        return response.Match(Ok, err => err.ToActionResult());
     }
-    
+
     [MapToApiVersion(1)]
     [HttpPut("{todoItemId:guid}")]
     public async Task<IActionResult> Update(
@@ -82,8 +98,21 @@ public class TodoItemsController(
         };
 
         var response = await sender.Send(request, ct);
-        if (!response.IsSuccess) return response.Error.ToActionResult();
+        return response.Match(NoContent, err => err.ToActionResult());
+    }
 
-        return NoContent();
+    [MapToApiVersion(1)]
+    [HttpDelete("{todoItemId:guid}")]
+    public async Task<IActionResult> Delete(
+        [FromRoute] Guid todoItemId,
+        CancellationToken ct)
+    {
+        var request = new DeleteTodoItemUseCase.Request
+        {
+            TodoItemId = TodoItemId.From(todoItemId),
+        };
+
+        var response = await sender.Send(request, ct);
+        return response.Match(NoContent, err => err.ToActionResult());
     }
 }
